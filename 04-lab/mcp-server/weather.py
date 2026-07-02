@@ -4,6 +4,13 @@ import httpx
 import os
 from mcp.server.fastmcp import FastMCP
 
+# Nạp WEATHERAPI_KEY từ .env cùng thư mục (nếu có python-dotenv)
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
+except ImportError:
+    pass
+
 # Initialize FastMCP server
 port = int(os.getenv("PORT", 8085))
 mcp = FastMCP("weather", host="0.0.0.0", port=port)

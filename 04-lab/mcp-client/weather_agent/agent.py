@@ -1,16 +1,29 @@
 """
-Weather Agent - Connects to Remote MCP Server on Cloud Run
-Successfully connects to custom MCP HTTP endpoints!
+Weather Agent - Connects to Remote MCP Server via Streamable HTTP.
+
+LLM: DeepSeek (endpoint tương thích OpenAI) thông qua LiteLlm của ADK.
+Cần đặt DEEPSEEK_API_KEY trong .env (LiteLlm tự đọc từ biến môi trường).
 """
-from google.adk import Agent
-from google.adk.tools.mcp_tool.mcp_toolset import McpToolset, StreamableHTTPConnectionParams
 import logging
+import os
+
+from dotenv import load_dotenv
+from google.adk import Agent
+from google.adk.models.lite_llm import LiteLlm
+from google.adk.tools.mcp_tool.mcp_toolset import McpToolset, StreamableHTTPConnectionParams
+
+# Nạp DEEPSEEK_API_KEY từ .env (thư mục mcp-client) và repo root
+load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".env"))
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 MCP_SERVER_URL = "http://localhost:8085/mcp"
+
+# DeepSeek qua LiteLlm — model string dạng "<provider>/<model>"
+LLM_MODEL = LiteLlm(model="deepseek/deepseek-chat")
 
 logger.info(f"🌐 Initializing weather agent with remote MCP server")
 logger.info(f"📡 MCP Server: {MCP_SERVER_URL}")
@@ -32,7 +45,7 @@ try:
     # Create the agent with remote MCP tools
     root_agent = Agent(
         name="weather_agent",
-        model="gemini-2.5-flash",
+        model=LLM_MODEL,
         tools=[weather_tools],
     )
     logger.info("✅ Weather agent initialized with remote MCP tools:")
@@ -51,6 +64,6 @@ except Exception as e:
     logger.warning("⚠️  Creating fallback agent without MCP tools")
     root_agent = Agent(
         name="weather_agent",
-        model="gemini-2.5-flash",
+        model=LLM_MODEL,
     )
 

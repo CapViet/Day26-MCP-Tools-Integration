@@ -1,0 +1,87 @@
+{
+  "eval_set_id": "eval_set_1",
+  "name": "eval_set_1",
+  "eval_cases": [
+    {
+      "eval_id": "Thi_tit_H_Ni_by_gi_th_no",
+      "conversation": [
+        {
+          "invocation_id": "e-e6e68a51-ec9b-4d3c-a4db-dc8d1b9d6636",
+          "user_content": {
+            "parts": [
+              {
+                "text": "\"Thời tiết Hà Nội bây giờ thế nào?"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "## Thời tiết Hà Nội hiện tại 🌤️\n\n| Thông số | Chi tiết |\n|---------|---------|\n| 🌡️ **Nhiệt độ** | **30°C** (cảm giác như 37°C) |\n| ☁️ **Trạng thái** | Có mây rải rác (Partly cloudy) |\n| 💧 **Độ ẩm** | 79% |\n| 🌬️ **Gió** | 7.9 km/h hướng Đông Nam |\n| 🕶️ **Chỉ số UV** | **9.0** - Rất cao |\n| 👁️ **Tầm nhìn** | 10 km |\n| 📊 **Áp suất** | 1007.0 mb |\n\n**Nhận xét:** Hà Nội đang khá nóng và oi bức, nhiệt độ thực tế 30°C nhưng cảm giác lên tới 37°C do độ ẩm cao. Chỉ số UV rất cao (9.0), nên nếu ra ngoài bạn nhớ bôi kem chống nắng và đội mũ nón nhé! 🧴🧢"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "invocation_events": [
+              {
+                "author": "weather_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "Tôi sẽ kiểm tra thời tiết hiện tại của Hà Nội ngay nhé!"
+                    },
+                    {
+                      "function_call": {
+                        "id": "call_00_JGEyjmCyqU9F35RSRu0x1057",
+                        "args": {
+                          "city": "Hanoi"
+                        },
+                        "name": "get_current_weather"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "weather_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "call_00_JGEyjmCyqU9F35RSRu0x1057",
+                        "name": "get_current_weather",
+                        "response": {
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "\nCurrent Weather for Hanoi, , Vietnam:\n\nTemperature: 30.0°C (86.0°F)\nFeels like: 37.0°C (98.6°F)\nCondition: Partly cloudy\nHumidity: 79%\nWind: 7.9 km/h (4.9 mph) ESE\nPressure: 1007.0 mb\nUV Index: 9.0\nVisibility: 10.0 km\n\nLast updated: 2026-07-02 10:15\n"
+                            }
+                          ],
+                          "structuredContent": {
+                            "result": "\nCurrent Weather for Hanoi, , Vietnam:\n\nTemperature: 30.0°C (86.0°F)\nFeels like: 37.0°C (98.6°F)\nCondition: Partly cloudy\nHumidity: 79%\nWind: 7.9 km/h (4.9 mph) ESE\nPressure: 1007.0 mb\nUV Index: 9.0\nVisibility: 10.0 km\n\nLast updated: 2026-07-02 10:15\n"
+                          },
+                          "isError": false
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              }
+            ]
+          },
+          "creation_timestamp": 1782962979.9348767
+        }
+      ],
+      "session_input": {
+        "app_name": "weather_agent",
+        "user_id": "user"
+      },
+      "creation_timestamp": 1782963013.7103722
+    }
+  ],
+  "creation_timestamp": 1782963009.9384027
+}
